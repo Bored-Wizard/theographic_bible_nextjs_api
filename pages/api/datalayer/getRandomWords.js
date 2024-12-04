@@ -872,7 +872,7 @@ export default async function handler(req, res) {
 
         let link = `https://raw.githubusercontent.com/gapmiss/berean-study-bible-with-strongs/refs/heads/master/bible/${bookNumber}%20-%20${book}/${book}%20${chapter}.md`;
 
-        let data = await fetch(link).then(res => res.text());
+        let data = await fetch(link).then(result => result.text());
 
         let match = data.match(/(\b\w+)\s*\[\[H([^\]]+)\]\]/g);
 
