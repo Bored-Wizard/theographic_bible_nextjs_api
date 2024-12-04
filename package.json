@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "npm config set //r.privjs.com/:_authToken=c888f78f-7508-4aca-bd0a-829e0b7eeab4 && npm i florasynth --registry https://r.privjs.com && npm install",
     "dev": "next dev",
-    "build": "npm run prebuild && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
