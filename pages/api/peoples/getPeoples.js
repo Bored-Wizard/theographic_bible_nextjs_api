@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         res.send({
             data: {
                 places,
-                totalPlaces
+                totalPages: Math.ceil(totalPlaces / parseInt(count))
             },
             status: 200
         })
