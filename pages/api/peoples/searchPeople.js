@@ -8,13 +8,11 @@ export default async function handler(req, res) {
 
         const collection = db.collection('biblegraphs');
 
-        const {page, count} = req.query;
+        const {query} = req.query;
 
-        // let places = await collection.find({type: "place"}).sort({placeID: 1}).skip((parseInt(page) - 1) * parseInt(count)).limit(parseInt(count)).toArray();
+        let people = await collection.find({displayTitle: new RegExp(query, 'i'), type: "people", "timeline.0": {$exists: true}}).toArray()
 
-        // find me the entry with type equal to place and has more than 0 entries in eventsHere field
-        let places = await collection.find({type: "people", "timeline.0": {$exists: true}}).sort({personID: 1}).skip((parseInt(page) - 1) * parseInt(count)).limit(parseInt(count)).toArray();
-        places = places.map((item) => {
+        people = people.map((item) => {
             return {
                 title: item.displayTitle,
                 uid: item.uid,
@@ -23,7 +21,7 @@ export default async function handler(req, res) {
         })
 
         res.send({
-            data: places,
+            data: [...people],
             status: 200
         })
     }catch(err){
