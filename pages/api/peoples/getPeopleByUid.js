@@ -52,10 +52,19 @@ export default async function handler(req, res) {
                     connectToField: "uid",
                     as: "children"
                 }
+            },
+            {
+                $graphLookup: {
+                    from: "biblegraphs",
+                    startWith: uid,
+                    connectFromField: "partners",
+                    connectToField: "uid",
+                    as: "partners"
+                }
             }
         ]).toArray();
 
-        let people = removeParentDuplicate(peopleGraph[0], ["father", "mother", "siblings", "children"], uid)
+        let people = removeParentDuplicate(peopleGraph[0], ["father", "mother", "siblings", "children", "partners"], uid)
         res.send({
             data: {
                 ...people

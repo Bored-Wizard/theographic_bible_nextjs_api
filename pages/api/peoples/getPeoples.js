@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         })
 
         res.send({
-            data: places,
+            data: [...places],
             status: 200
         })
     }catch(err){
